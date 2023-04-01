@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-UI", "1-UI", "{F10A461C-66AF-4088-8E0D-1A61866C3201}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{DA5C77FB-CFE9-4D13-A321-FFBF5E3B071F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infrastructure", "4-Infrastructure", "{086CA239-ACE7-4DA9-90E2-3E05BB490EE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{AAC5BC93-9C6D-41CC-AA71-C7784B5255C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedeSocial.WebApp", "RedeSocial.WebApp\RedeSocial.WebApp.csproj", "{CAE686BA-B192-42D5-97EE-467394D6708F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedeSocial.Domain", "RedeSocial.Domain\RedeSocial.Domain.csproj", "{F939F250-D141-47CE-9CDD-E98E5BF2E172}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedeSocial.Infra", "RedeSocial.Infra\RedeSocial.Infra.csproj", "{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{99A03AA1-6663-43EC-9010-8AC2A8FC5E24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAE686BA-B192-42D5-97EE-467394D6708F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAE686BA-B192-42D5-97EE-467394D6708F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAE686BA-B192-42D5-97EE-467394D6708F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAE686BA-B192-42D5-97EE-467394D6708F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F939F250-D141-47CE-9CDD-E98E5BF2E172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F939F250-D141-47CE-9CDD-E98E5BF2E172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F939F250-D141-47CE-9CDD-E98E5BF2E172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F939F250-D141-47CE-9CDD-E98E5BF2E172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A03AA1-6663-43EC-9010-8AC2A8FC5E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A03AA1-6663-43EC-9010-8AC2A8FC5E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A03AA1-6663-43EC-9010-8AC2A8FC5E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A03AA1-6663-43EC-9010-8AC2A8FC5E24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAE686BA-B192-42D5-97EE-467394D6708F} = {F10A461C-66AF-4088-8E0D-1A61866C3201}
+		{F939F250-D141-47CE-9CDD-E98E5BF2E172} = {DA5C77FB-CFE9-4D13-A321-FFBF5E3B071F}
+		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8} = {086CA239-ACE7-4DA9-90E2-3E05BB490EE3}
+		{99A03AA1-6663-43EC-9010-8AC2A8FC5E24} = {AAC5BC93-9C6D-41CC-AA71-C7784B5255C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF0B084C-C1FE-43B7-837F-8B6A1BE9A241}
+	EndGlobalSection
+EndGlobal
