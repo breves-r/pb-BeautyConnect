@@ -6,10 +6,12 @@ namespace RedeSocial.Domain.Services
     public class ProfileService
     {
         private readonly IProfileRepository _profileRepository;
+        private readonly FriendshipService _friendshipService;
 
-        public ProfileService(IProfileRepository profileRepository)
+        public ProfileService(IProfileRepository profileRepository, FriendshipService friendshipService)
         {
             _profileRepository = profileRepository;
+            _friendshipService = friendshipService;
         }
 
         public ICollection<Profile> ConsultarProfiles()
@@ -45,6 +47,7 @@ namespace RedeSocial.Domain.Services
 
         public bool ExcluirProfile(Profile profile)
         {
+            _friendshipService.ExcluirTodasAmizades(profile.IdProfile);
             int cont = _profileRepository.Excluir(profile);
             if (cont == 0)
             {

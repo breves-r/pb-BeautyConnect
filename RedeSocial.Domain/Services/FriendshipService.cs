@@ -37,5 +37,12 @@ namespace RedeSocial.Domain.Services
         public ICollection<Friendship> GetFriends(Guid IdProfileA) {
             return _friendshipRepository.ConsultarTodasDoProfile(IdProfileA);
         }
+
+        public bool ExcluirTodasAmizades(Guid profileId)
+        {
+            int cont = _friendshipRepository.DeleteAll(profileId);
+
+            return cont == 0 ? false : true;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace RedeSocial.Domain.Interfaces
         public void Criar(Friendship friendship);
         public ICollection<Friendship> ConsultarTodasDoProfile(Guid IdProfile);
         public bool Exist(Friendship friendship);
+        public int DeleteAll(Guid idProfile);
 
     }
 }

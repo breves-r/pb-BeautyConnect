@@ -44,5 +44,17 @@ namespace RedeSocial.Infra.Repositories
 
             return false;
         }
+
+        public int DeleteAll(Guid idProfile)
+        {
+            ICollection<Friendship> friends = this.ConsultarTodasDoProfile(idProfile);
+
+            foreach (var friend in friends)
+            {
+                _context.Friendships.Remove(friend);
+            }
+
+            return _context.SaveChanges();
+        }
     }
 }
