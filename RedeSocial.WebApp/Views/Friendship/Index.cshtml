@@ -1,0 +1,47 @@
+﻿@model IEnumerable<RedeSocial.Domain.Entities.Friendship>
+@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Meus amigos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome do Amigo
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                @if (item.IdProfileA.ToString() != this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProfileA.Nome)
+                    </td>
+                    <td>
+                       <a asp-controller="Profiles" asp-action="Details" asp-route-id="@item.IdProfileA">Details</a>
+                    </td>
+                }
+                @if (item.IdProfileB.ToString() != this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProfileB.Nome)
+                            </td>
+                            <td>
+                            <a asp-controller="Profiles" asp-action="Details" asp-route-id="@item.IdProfileB">Details</a>
+            </td>
+                }
+            
+            
+        </tr>
+}
+    </tbody>
+</table>

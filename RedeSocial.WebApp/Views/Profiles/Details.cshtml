@@ -1,0 +1,95 @@
+﻿@model RedeSocial.Domain.Entities.Profile
+@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Meu Perfil";
+}
+
+<h3>Meu Perfil</h3>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @User.Identity.Name
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-controller="ProfileDetails" asp-action="Index" asp-route-profileId="@Model.IdProfile">Informações Pessoais</a>
+    @if (Model.IdProfile.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.IdProfile">| Edit |</a>
+        <a asp-action="Delete" asp-route-id="@Model?.IdProfile">Delete |</a>
+       <a asp-controller="Friendship" asp-action="Index">Meus amigos</a>
+    }
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                CreatedDate
+            </th>
+            <th>
+                Descricao
+            </th>
+            <th>
+                Imagem
+            </th>
+            <th>
+                Produto
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Posts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Imagem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                @if (item.Profile.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
+                {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a asp-action = "Details" asp-route-id = "@item.Id" > Details </a>
+                                <a asp-action = "Delete" asp-route-id = "@item.Id" > Delete </a>
+                            </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
