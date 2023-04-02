@@ -4,15 +4,22 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Detalhes</h2>
 
 <div class="row">
-    <div>
-        <img src="@Model.Profile.Foto" style="border-radius: 50%; height: 80px; width: 80px;"/>
+    <div class="col-10">
+        <div class="row">
+            <div class="col-2">
+                <img src="@Model.Profile.Foto" style="border-radius: 50%; height: 80px; width: 80px;"/>
+            </div>
+            <div class="col-4">
+                <h3>@Model.Profile.Nome</h3>
+            </div>
+        </div>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-        <a asp-action="Delete" asp-route-id="@Model?.Id">Delete</a> |
+    <div class="col">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-primary rounded-pill" style="width: 60px;">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-sm btn-outline-danger rounded-pill">Delete</a>
     </div>
 </div>
 
