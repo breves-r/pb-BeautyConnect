@@ -17,16 +17,21 @@
         </div>
         <div class="col-6">
             <dd class = "col-sm-10 fs-2">
-                @Html.DisplayFor(model => model.Nome)
+                @Html.DisplayFor(model => model.Nome) @Html.DisplayFor(model => model. Sobrenome)
+            </dd>
+            <dd class = "col-sm-10 fs-5">
+                Telefone: @Html.DisplayFor(model => model.Telefone)
             </dd>
             <dd class="col-sm-10">
-                @User.Identity.Name
+                Email: @User.Identity.Name
             </dd>
         </div>
-        <div class="col">
+        <div class="col d-flex flex-column align-items-end justify-content-around" style="display: block">
+            <a asp-controller="ProfileDetails" style="width: 60%" class="btn btn-outline-primary" asp-action="Index" asp-route-profileId="@Model.IdProfile">Informações Pessoais</a>
             @if (Model.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
                 {
-                    <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model?.IdProfile">Editar</a>
+                    <a asp-controller="Friendship" asp-action="Index" class="btn btn-outline-primary" style="width: 60%">Meus amigos</a>
+                        <a asp-action="Edit" class="btn btn-outline-primary" style="width: 60%" asp-route-id="@Model?.IdProfile">Editar</a>
                 }
         </div>
     </div>

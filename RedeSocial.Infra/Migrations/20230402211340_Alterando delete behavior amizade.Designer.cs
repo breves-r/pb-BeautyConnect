@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedeSocial.Infra.Context;
 
@@ -11,9 +12,10 @@ using RedeSocial.Infra.Context;
 namespace RedeSocial.Infra.Migrations
 {
     [DbContext(typeof(RedeSocialDbContext))]
-    partial class RedeSocialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230402211340_Alterando delete behavior amizade")]
+    partial class Alterandodeletebehavioramizade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

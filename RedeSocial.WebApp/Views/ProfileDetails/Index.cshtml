@@ -1,0 +1,54 @@
+﻿@model RedeSocial.Domain.Entities.ProfileDetails
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h4>Profile Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Profile)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Profile.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aniversario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aniversario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoPele)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoPele)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoCabelo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoCabelo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CorPele)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CorPele)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CorCabelo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CorCabelo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit">Edit</a> |
+    <a asp-controller="Profiles" asp-action="Details" asp-route-id="@Model?.ProfileId">Back to Profile</a>
+</div>

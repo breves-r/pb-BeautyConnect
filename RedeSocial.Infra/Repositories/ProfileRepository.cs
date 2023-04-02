@@ -16,7 +16,7 @@ namespace RedeSocial.Infra.Repositories
 
         public ICollection<Profile> ConsultarTodos()
         {
-            return _context.Profiles.Include(x => x.Posts).ToList();
+            return _context.Profiles.Include(x => x.Posts).Include(x => x.FriendshipsA).Include(x => x.FriendshipsB).ToList();
         }
 
         public bool Vazio()

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedeSocial.Infra.Context;
 
@@ -11,9 +12,10 @@ using RedeSocial.Infra.Context;
 namespace RedeSocial.Infra.Migrations
 {
     [DbContext(typeof(RedeSocialDbContext))]
-    partial class RedeSocialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230401211431_Adicionando-Amizades")]
+    partial class AdicionandoAmizades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,13 +146,13 @@ namespace RedeSocial.Infra.Migrations
                     b.HasOne("RedeSocial.Domain.Entities.Profile", "ProfileA")
                         .WithMany("FriendshipsB")
                         .HasForeignKey("IdProfileA")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RedeSocial.Domain.Entities.Profile", "ProfileB")
                         .WithMany("FriendshipsA")
                         .HasForeignKey("IdProfileB")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProfileA");
@@ -162,8 +164,7 @@ namespace RedeSocial.Infra.Migrations
                 {
                     b.HasOne("RedeSocial.Domain.Entities.Profile", "Profile")
                         .WithMany("Posts")
-                        .HasForeignKey("ProfileIdProfile")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProfileIdProfile");
 
                     b.Navigation("Profile");
                 });
