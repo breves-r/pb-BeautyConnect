@@ -18,7 +18,7 @@ namespace RedeSocial.Infra.Context.Mapping
                    .IsRequired().HasMaxLength(100);
             builder.Property(x => x.Foto);
 
-            builder.HasMany(x => x.Posts).WithOne(x => x.Profile);
+            builder.HasMany(x => x.Posts).WithOne(x => x.Profile).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

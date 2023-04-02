@@ -24,7 +24,7 @@
             </dd>
         </div>
         <div class="col">
-            @if (Model.IdProfile.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+            @if (Model.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
                 {
                     <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model?.IdProfile">Editar</a>
                 }
