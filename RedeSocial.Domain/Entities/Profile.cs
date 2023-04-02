@@ -9,7 +9,6 @@ namespace RedeSocial.Domain.Entities
             this.Posts = new List<Post>();
         }
 
-        [Key]
         public Guid IdProfile { get; set; }
 
         [Required(ErrorMessage = "Campo 'Nome' Obrigatório")]

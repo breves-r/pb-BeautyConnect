@@ -31,7 +31,7 @@ namespace RedeSocial.Infra.Repositories
 
         public Post Consultar(int id)
         {
-            return _context.Posts.Find(id);
+            return _context.Posts.Include(x => x.Profile).FirstOrDefault(x => x.Id == id);
         }
 
         public void Criar(Post post)
