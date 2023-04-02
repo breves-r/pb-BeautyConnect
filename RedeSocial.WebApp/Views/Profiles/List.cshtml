@@ -5,45 +5,33 @@
     ViewData["Title"] = "List";
 }
 
-<h1>Todos os perfils</h1>
+<h2>Todos os perfils</h2>
+<hr/>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-            bool isFriend = item.FriendshipsA.Any(p => p.IdProfileA.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value
+<div class="d-flex flex-row flex-wrap justify-content-between mt-4">
+@foreach (var item in Model) {
+    bool isFriend = item.FriendshipsA.Any(p => p.IdProfileA.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                             || p.IdProfileB.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            bool isFriend2 = item.FriendshipsB.Any(
-                            p => p.IdProfileA.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value
+    bool isFriend2 = item.FriendshipsB.Any(
+                        p => p.IdProfileA.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                             || p.IdProfileB.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            <tr>
-            <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Foto)
-            </td>
-            <td class="col-md-2">
-                <a asp-action="Details" asp-route-id="@item.IdProfile">Details</a>
-                @if (item.IdProfile.ToString() != this.User.FindFirst(ClaimTypes.NameIdentifier).Value && !isFriend && !isFriend2)
-                {
-                    <form asp-controller="Friendship" asp-action="Create" asp-route-id="@item.IdProfile">
+            
+    
+    <div style="height: 320px">
+        <div class="card text-center" style="width: 14rem; height: 300px">
+          <img class="card-img-top" src="@item.Foto" style="height: 200px; object-fit: cover" alt="Foto de Perfil">
+          <div class="card-body">
+            <h5 class="card-title">@item.Nome</h5>
+            <a class="btn btn-light" asp-action="Details" asp-route-id="@item.IdProfile">Visitar perfil</a>
+              @if (item.IdProfile.ToString() != this.User.FindFirst(ClaimTypes.NameIdentifier).Value && !isFriend && !isFriend2)
+              {
+                <form asp-controller="Friendship" asp-action="Create" asp-route-id="@item.IdProfile">
                             
                             <input type="submit" value="Adicionar"/>
                         </form>
-                }
-            </td>
-        </tr>
+              }
+          </div>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+</div>

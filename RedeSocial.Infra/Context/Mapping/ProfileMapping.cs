@@ -23,7 +23,7 @@ namespace RedeSocial.Infra.Context.Mapping
             builder.Property(x => x.Foto);
 
             builder.HasOne(x => x.Details).WithOne(x => x.Profile).HasForeignKey<ProfileDetails>(x => x.ProfileId);
-            builder.HasMany(x => x.Posts).WithOne(x => x.Profile);
+            builder.HasMany(x => x.Posts).WithOne(x => x.Profile).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

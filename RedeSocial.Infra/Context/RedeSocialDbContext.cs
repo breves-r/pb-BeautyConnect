@@ -10,7 +10,6 @@ namespace RedeSocial.Infra.Context
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
-
         public DbSet<ProfileDetails> ProfileDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

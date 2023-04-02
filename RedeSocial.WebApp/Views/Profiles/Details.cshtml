@@ -8,88 +8,49 @@
 <h3>Meu Perfil</h3>
 <hr />
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt class="col-sm-2">
-            Email
-        </dt>
-        <dd class="col-sm-10">
-            @User.Identity.Name
-        </dd>
-    </dl>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <dd class = "col-sm-10 d-flex justify-content-center">
+                <img src="@Model.Foto" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover"/>
+            </dd>
+        </div>
+        <div class="col-6">
+            <dd class = "col-sm-10 fs-2">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dd class="col-sm-10">
+                @User.Identity.Name
+            </dd>
+        </div>
+        <div class="col">
+            <a asp-controller="ProfileDetails" asp-action="Index" asp-route-profileId="@Model.IdProfile">Informações Pessoais</a>
+            @if (Model.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
+                {
+                    <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model?.IdProfile">Editar</a>
+                    <a asp-controller="Friendship" asp-action="Index">Meus amigos</a>
+                }
+        </div>
+    </div>
 </div>
+<hr />
 
-<div>
-    <a asp-controller="ProfileDetails" asp-action="Index" asp-route-profileId="@Model.IdProfile">Informações Pessoais</a>
-    @if (Model.IdProfile.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+<div class="d-flex flex-row flex-wrap justify-content-between">
+    @foreach (var item in Model.Posts)
     {
-        <a asp-action="Edit" asp-route-id="@Model?.IdProfile">| Edit |</a>
-        <a asp-action="Delete" asp-route-id="@Model?.IdProfile">Delete |</a>
-       <a asp-controller="Friendship" asp-action="Index">Meus amigos</a>
+        <div class="card-deck" style="max-height: 550px">
+            <div class="card mt-3" style="width: 18rem; height: 500px">
+              <img class="card-img-top" src="@item.Imagem" alt="Card image cap" style="max-height:250px">
+              <div class="card-body d-flex flex-column ">
+                <h5 class="card-title">@item.Produto</h5>
+                <p class="card-text text-wrap" style="text-overflow: ellipsis; max-height: 100px; width: 97%; white-space: nowrap; overflow: hidden;">@item.Descricao</p>
+                <a asp-action="Details" asp-controller="Posts" asp-route-id="@item.Id" class="btn btn-outline-primary">Ver postagem completa</a>             
+              </div>
+              <div class="card-footer">
+                  <img src="@item.Profile.Foto" style="height:45px; width: 45px; border-radius:50%; object-fit: cover" />
+                <small class="text-muted"> Postado em @item.CreatedDate</small>
+              </div>
+            </div>
+        </div>
     }
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                CreatedDate
-            </th>
-            <th>
-                Descricao
-            </th>
-            <th>
-                Imagem
-            </th>
-            <th>
-                Produto
-            </th>
-            <th>
-                Categoria
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Posts)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Imagem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Produto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria)
-                </td>
-                @if (item.Profile.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
-                {
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a asp-action = "Details" asp-route-id = "@item.Id" > Details </a>
-                                <a asp-action = "Delete" asp-route-id = "@item.Id" > Delete </a>
-                            </td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>

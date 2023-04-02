@@ -4,11 +4,8 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h2 class="text-center">Você tem certeza que deseja deletar essa postagem?</h2>
 <div>
-    <h4>Post</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -45,7 +42,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger rounded-pill" /> 
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-primary rounded-pill">Voltar</a>
     </form>
 </div>

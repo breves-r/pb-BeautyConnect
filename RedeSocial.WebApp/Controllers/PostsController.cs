@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using RedeSocial.Domain.Entities;
 using RedeSocial.Domain.Services;
 using System.Security.Claims;
@@ -11,6 +14,9 @@ namespace RedeSocial.WebApp.Controllers
     {
         private readonly PostService _service;
         private readonly ProfileService _profileService;
+
+        private const string connectionString = "DefaultEndpointsProtocol=https;AccountName=mariamafrastorage;AccountKey=/vR7bYN7PWaz+06lScJ5tZeXADYNTIFfurNas3AbSD7DFim2085PmZU7sF8Dx6NrML3+3Wijcs2z+AStwRdMgA==;EndpointSuffix=core.windows.net";
+        private const string containerName = "imagens";
 
         public PostsController(PostService service, ProfileService profileService)
         {
@@ -52,10 +58,11 @@ namespace RedeSocial.WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Post post)
+        public IActionResult Create(Post post, IFormFile Imagem)
         {
             if (ModelState.IsValid)
             {
+                post.Imagem = UploadImage(Imagem);
                 post.Profile = GetProfile();
                 post.Profile.Posts.Add(post);
                 _service.CriarPost(post);
@@ -85,7 +92,7 @@ namespace RedeSocial.WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Post post)
+        public IActionResult Edit(int id, Post post, IFormFile Imagem)
         {
             if (id != post.Id)
             {
@@ -94,6 +101,7 @@ namespace RedeSocial.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
+                post.Imagem = UploadImage(Imagem);
                 bool result = _service.AlterarPost(post);
 
                 if (!result)
@@ -135,6 +143,7 @@ namespace RedeSocial.WebApp.Controllers
             var post = _service.ConsultarPost(id);
             if (post != null)
             {
+                ExcluirImagem(post.Imagem);
                 _service.DeletarPost(post);
             }
 
@@ -145,6 +154,37 @@ namespace RedeSocial.WebApp.Controllers
         {
             var id = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             return _profileService.ConsultarProfile(id);
+        }
+
+        private static string UploadImage(IFormFile imageFile)
+        {
+            var reader = imageFile.OpenReadStream();
+            var cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
+            var blobClient = cloudStorageAccount.CreateCloudBlobClient();
+            var container = blobClient.GetContainerReference(containerName);
+            container.CreateIfNotExistsAsync();
+
+            CloudBlockBlob blob = container.GetBlockBlobReference(imageFile.FileName);
+            blob.UploadFromStreamAsync(reader);
+
+            System.Threading.Thread.Sleep(1000);
+
+            return blob.Uri.ToString();
+        }
+
+        private static void ExcluirImagem(string imagem)
+        {
+            if (imagem == null) { return; }
+            try
+            {
+                string nomeArquivo = imagem.Split("/" + containerName + "/")[1];
+                var blobClient = new BlobClient(connectionString, containerName, nomeArquivo);
+                blobClient.Delete();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
