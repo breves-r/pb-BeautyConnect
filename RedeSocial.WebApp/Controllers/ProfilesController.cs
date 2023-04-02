@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage;
 using RedeSocial.Domain.Entities;
 using RedeSocial.Domain.Services;
 
@@ -10,6 +12,9 @@ namespace RedeSocial.WebApp.Controllers
     public class ProfilesController : Controller
     {
         private readonly ProfileService _service;
+
+        private const string connectionString = "DefaultEndpointsProtocol=https;AccountName=mariamafrastorage;AccountKey=/vR7bYN7PWaz+06lScJ5tZeXADYNTIFfurNas3AbSD7DFim2085PmZU7sF8Dx6NrML3+3Wijcs2z+AStwRdMgA==;EndpointSuffix=core.windows.net";
+        private const string containerName = "imagens";
 
         public ProfilesController(ProfileService serice)
         {
@@ -75,10 +80,11 @@ namespace RedeSocial.WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Profile profile)
+        public IActionResult Create(Profile profile, IFormFile Foto)
         {
             if (ModelState.IsValid)
             {
+                profile.Foto = UploadImage(Foto);
                 profile.IdProfile = GetUserId();
                 _service.CriarProfile(profile);
                 return RedirectToAction(nameof(Index));
@@ -107,7 +113,7 @@ namespace RedeSocial.WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, Profile profile)
+        public IActionResult Edit(Guid id, Profile profile, IFormFile Foto)
         {
             if (id != profile.IdProfile)
             {
@@ -116,7 +122,7 @@ namespace RedeSocial.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-
+                profile.Foto = UploadImage(Foto);
                 bool result = _service.AlterarProfile(profile);
 
                 if (!result)
@@ -168,6 +174,22 @@ namespace RedeSocial.WebApp.Controllers
         {
             // Busca na tabela AspNetUser o primeiro campo
             return Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        }
+
+        private static string UploadImage(IFormFile imageFile)
+        {
+            var reader = imageFile.OpenReadStream();
+            var cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
+            var blobClient = cloudStorageAccount.CreateCloudBlobClient();
+            var container = blobClient.GetContainerReference(containerName);
+            container.CreateIfNotExistsAsync();
+
+            CloudBlockBlob blob = container.GetBlockBlobReference(imageFile.FileName);
+            blob.UploadFromStreamAsync(reader);
+
+            System.Threading.Thread.Sleep(1000);
+
+            return blob.Uri.ToString();
         }
     }
 }

@@ -8,35 +8,28 @@
 <h3>Meu Perfil</h3>
 <hr />
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt class="col-sm-2">
-            Email
-        </dt>
-        <dd class="col-sm-10">
-            @User.Identity.Name
-        </dd>
-    </dl>
-</div>
-
-<div>
-    @if (Model.IdProfile.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
-    {
-        <a asp-action="Edit" asp-route-id="@Model?.IdProfile">Edit |</a>
-        <a asp-action="Delete" asp-route-id="@Model?.IdProfile">Delete</a>
-    }
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <dd class = "col-sm-10 d-flex justify-content-center">
+                <img src="@Model.Foto" style="width: 150px; height: 150px; border-radius: 50%"/>
+            </dd>
+        </div>
+        <div class="col-6">
+            <dd class = "col-sm-10 fs-2">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dd class="col-sm-10">
+                @User.Identity.Name
+            </dd>
+        </div>
+        <div class="col">
+            @if (Model.IdProfile.ToString() == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                {
+                    <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model?.IdProfile">Editar</a>
+                }
+        </div>
+    </div>
 </div>
 
 <table class="table">
@@ -71,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Imagem)
+                    <img src="@item.Imagem" style="max-width:350px; height:auto">
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Produto)
