@@ -17,7 +17,7 @@
             <img class="card-img-top" src="@item.ProfileA.Foto" style="height: 200px; object-fit: cover" alt="Foto de Perfil">
             <div class="card-body">
                 <h5 class="card-title">@item.ProfileA.Nome @item.ProfileA.Sobrenome</h5>
-                <a class="btn btn-light rounded-pill" asp-action="Details" asp-route-id="@item.ProfileA.IdProfile">Visitar perfil</a>
+                <a class="btn btn-light rounded-pill" asp-action="Details" asp-controller="Profiles" asp-route-id="@item.ProfileA.IdProfile">Visitar perfil</a>
           </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 <img class="card-img-top" src="@item.ProfileB.Foto" style="height: 200px; object-fit: cover" alt="Foto de Perfil">
                 <div class="card-body">
                     <h5 class="card-title">@item.ProfileB.Nome @item.ProfileB.Sobrenome</h5>
-                    <a class="btn btn-light rounded-pill" asp-action="Details" asp-route-id="@item.ProfileB.IdProfile">Visitar perfil</a>
+                    <a class="btn btn-light rounded-pill" asp-action="Details" asp-controller="Profiles" asp-route-id="@item.ProfileB.IdProfile">Visitar perfil</a>
               </div>
             </div>
         </div>
