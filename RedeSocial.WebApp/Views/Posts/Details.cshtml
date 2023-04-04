@@ -1,8 +1,10 @@
 ﻿@model RedeSocial.Domain.Entities.Post
 @using System.Security.Claims;
-
+@using RedeSocial.Domain.Entities
 @{
     ViewData["Title"] = "Details";
+    Comment comment = ViewData["Comment"] as Comment;
+    ICollection<Comment> comments = ViewData["Comments"] as ICollection<Comment>;
 }
 
 <h2>Detalhes</h2>
@@ -23,6 +25,8 @@
             <img src="@Model.Profile.Foto" style="height:45px; width: 45px; border-radius: 50%; object-fit: cover" />
             <small class="text-muted"> Postado em @Model.CreatedDate</small>
         </div>
+
+        
             @if(Model.Profile.IdProfile.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
             {
                 <div class="d-flex align-items-center justify-content-around" style="width: 150px">
@@ -31,6 +35,18 @@
                 </div>
             }
       </div>
+        <div class="card-body">
+            <p class="card-text">Adicionar Comentário</p>
+            <form class="mt-2" asp-controller="Comments" asp-action="Create" asp-route-postId="@Model.Id">
+                <input asp-for="@comment.Descricao" class="form-control" />
+                <input type="submit" value="Comentar" class="btn btn-primary rounded-pill" style="width: 65%" />
+            </form>
+        </div>
+        @foreach(Comment c in comments)
+        {
+            <p>@c.Profile.Nome</p>
+            <p>@c.Descricao</p>
+        }
     </div>
 </div>
 

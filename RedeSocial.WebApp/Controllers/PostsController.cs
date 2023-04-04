@@ -14,14 +14,16 @@ namespace RedeSocial.WebApp.Controllers
     {
         private readonly PostService _service;
         private readonly ProfileService _profileService;
+        private readonly CommentService _commentService;
 
         private const string connectionString = "DefaultEndpointsProtocol=https;AccountName=mariamafrastorage;AccountKey=/vR7bYN7PWaz+06lScJ5tZeXADYNTIFfurNas3AbSD7DFim2085PmZU7sF8Dx6NrML3+3Wijcs2z+AStwRdMgA==;EndpointSuffix=core.windows.net";
         private const string containerName = "imagens";
 
-        public PostsController(PostService service, ProfileService profileService)
+        public PostsController(PostService service, ProfileService profileService, CommentService commentService)
         {
             _service = service;
             _profileService = profileService;
+            _commentService = commentService;
         }
 
         // GET: Posts
@@ -44,6 +46,15 @@ namespace RedeSocial.WebApp.Controllers
                 return NotFound();
             }
 
+            //Comments section
+            ICollection<Comment> comments = _commentService.ConsultarComments(post.Id);
+
+            if(comments != null || comments.Count < 1)
+            {
+                ViewData["Comments"] = comments;
+            }
+
+            ViewData["Comment"] = new Comment();
             return View(post);
         }
 

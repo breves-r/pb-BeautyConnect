@@ -29,6 +29,8 @@ namespace RedeSocial.WebApp
             builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
             builder.Services.AddScoped<PostService, PostService>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
+            builder.Services.AddScoped<CommentService, CommentService>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             builder.Services.AddScoped<FriendshipService, FriendshipService>();
             builder.Services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             builder.Services.AddScoped<ProfileDetailsService, ProfileDetailsService>();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedeSocial.Infra.Context;
 
@@ -11,9 +12,10 @@ using RedeSocial.Infra.Context;
 namespace RedeSocial.Infra.Migrations
 {
     [DbContext(typeof(RedeSocialDbContext))]
-    partial class RedeSocialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230404105946_Adicionando-Comments")]
+    partial class AdicionandoComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,17 +37,17 @@ namespace RedeSocial.Infra.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProfileId")
+                    b.Property<Guid?>("ProfileIdProfile")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("ProfileIdProfile");
 
                     b.ToTable("Comments");
                 });
@@ -171,15 +173,11 @@ namespace RedeSocial.Infra.Migrations
                 {
                     b.HasOne("RedeSocial.Domain.Entities.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PostId");
 
                     b.HasOne("RedeSocial.Domain.Entities.Profile", "Profile")
                         .WithMany()
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ProfileIdProfile");
 
                     b.Navigation("Post");
 
