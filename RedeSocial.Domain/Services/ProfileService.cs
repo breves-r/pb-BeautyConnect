@@ -7,11 +7,13 @@ namespace RedeSocial.Domain.Services
     {
         private readonly IProfileRepository _profileRepository;
         private readonly FriendshipService _friendshipService;
+        private readonly CommentService _commentService;
 
-        public ProfileService(IProfileRepository profileRepository, FriendshipService friendshipService)
+        public ProfileService(IProfileRepository profileRepository, FriendshipService friendshipService, CommentService commentService)
         {
             _profileRepository = profileRepository;
             _friendshipService = friendshipService;
+            _commentService = commentService;
         }
 
         public ICollection<Profile> ConsultarProfiles()
@@ -48,6 +50,8 @@ namespace RedeSocial.Domain.Services
         public bool ExcluirProfile(Profile profile)
         {
             _friendshipService.ExcluirTodasAmizades(profile.IdProfile);
+            _commentService.DeletarCommentsPorProfile(profile.IdProfile);
+
             int cont = _profileRepository.Excluir(profile);
             if (cont == 0)
             {
@@ -56,5 +60,7 @@ namespace RedeSocial.Domain.Services
 
             return true;
         }
+
+
     }
 }

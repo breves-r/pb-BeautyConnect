@@ -24,6 +24,12 @@ namespace RedeSocial.Infra.Repositories
             return _context.Comments.Include(x => x.Post).Include(x => x.Profile).Where(x => x.PostId == postId).ToList();
         }
 
+        public Comment Consultar(int id)
+        {
+            return _context.Comments.Include(x => x.Post).Include(x => x.Profile).FirstOrDefault(x => x.Id == id);
+        }
+
+
         public void Criar(Comment comment)
         {
             _context.Comments.Add(comment);
@@ -39,6 +45,18 @@ namespace RedeSocial.Infra.Repositories
         public int Excluir(Comment comment)
         {
             _context.Comments.Remove(comment);
+            return _context.SaveChanges();
+        }
+
+        public int ExcluirComentariosPorProfile(Guid profileId)
+        {
+            ICollection<Comment> comments = _context.Comments.Where(x => x.ProfileId == profileId).ToList();
+
+            foreach (var comment in comments)
+            {
+                _context.Comments.Remove(comment);
+            }
+
             return _context.SaveChanges();
         }
     }

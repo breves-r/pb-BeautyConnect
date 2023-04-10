@@ -44,6 +44,14 @@
         </div>
         @foreach(Comment c in comments)
         {
+            @if (c.ProfileId.ToString() == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToString())
+            {
+                <div class="d-flex align-items-center justify-content-around" style="width: 150px">
+                    <form class="mt-2" asp-controller="Comments" asp-action="DeletePost" asp-route-id="@c.Id">
+                        <input style="width: 110px" class="btn btn-sm btn-outline-danger rounded-pill" type="submit" value="Delete" />
+                    </form>
+                </div>
+            }
             <p>@c.Profile.Nome</p>
             <p>@c.Descricao</p>
         }

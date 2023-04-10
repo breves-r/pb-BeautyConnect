@@ -22,6 +22,17 @@ namespace RedeSocial.Domain.Services
             return _repository.ConsultarTodosDoPost(postId);
         }
 
+        public bool DeletarCommentsPorProfile(Guid profileId)
+        {
+            int cont = _repository.ExcluirComentariosPorProfile(profileId);
+            return cont == 0 ? false : true;
+        }
+
+        public Comment ConsultarComment(int id)
+        {
+            return _repository.Consultar(id);
+        }
+
         public void CriarComment(Comment comment)
         {
             _repository.Criar(comment);
@@ -40,5 +51,6 @@ namespace RedeSocial.Domain.Services
             
             return cont == 0 ? false : true;
         }
+
     }
 }
