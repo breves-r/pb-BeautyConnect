@@ -1,24 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RedeSocial.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RedeSocial.Infra.Context.Mapping
 {
-    public class PostMapping : IEntityTypeConfiguration<Post>
+    public class CommentMapping : IEntityTypeConfiguration<Comment>
     {
-        public void Configure(EntityTypeBuilder<Post> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
             builder.Property(x => x.Descricao)
                    .IsRequired().HasMaxLength(500);
-            builder.Property(x => x.CreatedDate);
-            builder.Property(x => x.Imagem);
-            builder.Property(x => x.Produto);
-            builder.Property(x => x.Categoria);
 
-            builder.HasMany(x => x.Comments).WithOne(x => x.Post).HasForeignKey(x => x.PostId);
+            builder.HasOne(x => x.Profile).WithMany().HasForeignKey(x => x.ProfileId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

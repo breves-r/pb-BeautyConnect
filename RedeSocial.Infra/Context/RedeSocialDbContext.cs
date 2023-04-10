@@ -9,6 +9,7 @@ namespace RedeSocial.Infra.Context
 
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<ProfileDetails> ProfileDetails { get; set; }
 

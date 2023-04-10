@@ -18,5 +18,7 @@ namespace RedeSocial.Domain.Entities
         public string Produto { get; set; }
 
         public string Categoria { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

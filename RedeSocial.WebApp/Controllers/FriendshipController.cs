@@ -27,8 +27,6 @@ namespace RedeSocial.WebApp.Controllers
         [HttpPost]
         public IActionResult Create(Guid id)
         {
-            Console.WriteLine(GetUserId());
-            Console.WriteLine(id);
             bool friends = _service.CriarAmizade(GetUserId(), id);
 
             if(friends)
