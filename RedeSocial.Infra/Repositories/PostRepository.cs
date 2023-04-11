@@ -26,12 +26,12 @@ namespace RedeSocial.Infra.Repositories
 
         public ICollection<Post> ConsultarTodos()
         {
-            return _context.Posts.Include(x => x.Profile).ToList();
+            return _context.Posts.Include(x => x.Profile).Include(x => x.Comments).ToList();
         }
 
         public Post Consultar(int id)
         {
-            return _context.Posts.Include(x => x.Profile).FirstOrDefault(x => x.Id == id);
+            return _context.Posts.Include(x => x.Profile).Include(x => x.Comments).FirstOrDefault(x => x.Id == id);
         }
 
         public void Criar(Post post)

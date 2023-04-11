@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace RedeSocial.Domain.Entities
 {
@@ -23,12 +24,16 @@ namespace RedeSocial.Domain.Entities
 
         public string Foto { get; set; }
 
+        [JsonIgnore]
         public ProfileDetails Details { get; set; }
 
+        [JsonIgnore]
         public List<Post> Posts { get; set; }
 
+        [JsonIgnore]
         public ICollection<Friendship> FriendshipsA { get; set; }
 
+        [JsonIgnore]
         public ICollection<Friendship> FriendshipsB { get; set; }
 
     }

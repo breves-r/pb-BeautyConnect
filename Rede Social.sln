@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedeSocial.Domain", "RedeSo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedeSocial.Infra", "RedeSocial.Infra\RedeSocial.Infra.csproj", "{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedeSocial.Api", "RedeSocial.Api\RedeSocial.Api.csproj", "{8F1748AC-9A1F-44A6-9156-A755279D429C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F1748AC-9A1F-44A6-9156-A755279D429C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F1748AC-9A1F-44A6-9156-A755279D429C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F1748AC-9A1F-44A6-9156-A755279D429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F1748AC-9A1F-44A6-9156-A755279D429C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{CAE686BA-B192-42D5-97EE-467394D6708F} = {F10A461C-66AF-4088-8E0D-1A61866C3201}
 		{F939F250-D141-47CE-9CDD-E98E5BF2E172} = {DA5C77FB-CFE9-4D13-A321-FFBF5E3B071F}
 		{C86EA760-F2E7-41EE-854D-A0DC5DB522A8} = {086CA239-ACE7-4DA9-90E2-3E05BB490EE3}
+		{8F1748AC-9A1F-44A6-9156-A755279D429C} = {AAC5BC93-9C6D-41CC-AA71-C7784B5255C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF0B084C-C1FE-43B7-837F-8B6A1BE9A241}
